@@ -1,0 +1,1 @@
+mocha ./test/test01.js ./test/test02.js

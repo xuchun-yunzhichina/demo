@@ -1,0 +1,13 @@
+{
+  "name": "demo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "test" : "mocha ./test/test01.js"
+  },
+  "dependencies": {
+    "express": "3.5.0",
+    "jade": "*"
+  }
+}
