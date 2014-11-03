@@ -30,10 +30,15 @@ describe("Customers", function(){
     }); 
   }); 
 
-  it("retrieves by email", function(done){    
-    customer.findByEmail(currentCustomer.email, function(doc){      
-      doc.email.should.equal("test@test.com");       
-      done();    
-    });  
-  });   
+  /*it("retrieves by email", function(done){ 
+	  customer.register("test2@test.com", "password", "password", function(doc){
+		    customer.findByEmail(currentCustomer.email, function(doc){      
+		        doc.email.should.equal("test@test.com");       
+		        done();    
+		      });
+		  
+	  });
+	  
+  
+  });  */ 
 });
