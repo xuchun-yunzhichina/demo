@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 var customer = require("../lib/customer");
 var should    	= require("chai").should();
 
