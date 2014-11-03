@@ -7,7 +7,7 @@
     "test" : "mocha ./test/test01.js"
   },
   "dependencies": {
-    "express": "3.5.0",
-    "jade": "*"
+	    "express": "3.5.0",
+	    "jade": "*",
   }
 }
