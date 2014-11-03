@@ -9,10 +9,4 @@ describe('Array', function(){
 	  expect(foo).to.equal('bar');
 	  expect(foo).to.have.length(3);
   })
-  
-    /*describe('#indexOf02()', function(){
-	  var foo = 'bar';
-	  
-	  expect(foo).to.have.length(4);
-  })*/
 })
