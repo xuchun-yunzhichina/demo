@@ -7,13 +7,16 @@ mongoose.connect('mongodb://localhost/tekpub_test');
 describe("Customers", function(){  
   var currentCustomer = null;  
 
-  beforeEach(function(done){    
+ /* beforeEach(function(done){    
     //add some test data    
     customer.register("test@test.com", "password", "password", function(doc){      
-      currentCustomer = doc;      
+      
+    
+    	
+    	currentCustomer = doc;      
       done();    
     });  
-  });  
+  }); */ 
 
 
   it("registers a new customer", function(done){    
