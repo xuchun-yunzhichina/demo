@@ -1,26 +1,64 @@
-var assert 		= require("assert")
-var should    	= require("chai").should();
+var mongoose = require("mongoose");
+var customer = require("../lib/customer");
+//tell Mongoose to use a different DB - created on the fly
+mongoose.connect('mongodb://localhost/tekpub_test');  
+describe("Customers", function(){  
+  var currentCustomer = null;  
 
-describe('Array', function(){
-  describe('#indexOf01()', function(){
-    it('should return -1 when the value is not present', function(){
-      //assert.equal(-1, [1,2,3].indexOf(5));
-      //assert.equal(-1, [1,2,3].indexOf(0));
-      
-      ([1,2,3].indexOf(5)).should.equal(-1);
-      ([1,2,3].indexOf(0)).should.equal(-1);
-    })
-  })
-  
-  
-    describe('#indexOf02()', function(){
-    it('should return -1 when the value is not present', function(){
-      //assert.equal(-1, [1,2,3].indexOf(5));
-      //assert.equal(-1, [1,2,3].indexOf(0));
-      
-      ([1,2,3].indexOf(5)).should.equal(-1);
-      //([1,2,3].indexOf(0)).should.equal(0); //错误测试用例
-    })
-  })
-  
-})
+  beforeEach(function(done){    
+    //add some test data    
+    customer.register("test@test.com", "password", "password", function(doc){      
+      currentCustomer = doc;      
+      done();    
+    });  
+  });  
+
+  afterEach(function(done){    
+    customer.model.remove({}, function() {      
+      done();    
+    });  
+  });
+
+  it("registers a new customer", function(done){    
+    customer.register("test2@test.com", "password", "password", function(doc){      
+      doc.email.should.equal("test2@test.com");      
+      doc.crypted_password.should.not.equal("password");      
+      done();    
+    }, function(message){      
+      message.should.equal(null);      
+      done();    
+    }); 
+  }); 
+
+  it("retrieves by email", function(done){    
+    customer.findByEmail(currentCustomer.email, function(doc){      
+      doc.email.should.equal("test@test.com");       
+      done();    
+    });  
+  });  
+
+  it("retrieves by token", function(done){    
+    customer.findByToken(currentCustomer.auth_token, function(doc){      
+      doc.email.should.equal("test@test.com");      
+      done();    
+    });  
+  });  
+
+  it("authenticates and returns customer with valid login", function(done){    
+    customer.authenticate(currentCustomer.email, "password", function(customer){      
+      customer.email.should.equal("test@test.com");      
+      done();    
+    }, function(){      
+      throw("oops");      
+      done();    
+    });  
+  });  
+
+  it("authenticates and returns fail with invalid login", function(done){    
+    customer.authenticate(currentCustomer.email, "liar", function(customer){      
+      throw("This shouldn't happen");    
+    }, function(){      
+      done();    
+    });  
+  });
+});
