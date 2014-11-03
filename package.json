@@ -7,9 +7,11 @@
     "test" : "mocha"
   },
   "dependencies": {
-	    "mocha": "2.0.1",
-	    "chai":"1.9.2",
 	    "express": "3.5.0",
 	    "jade": "*"
-  }
+  },
+  "devDependencies": {
+	    "mocha": "2.0.1",
+	    "chai":"1.9.2"
+   }
 }
