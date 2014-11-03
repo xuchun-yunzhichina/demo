@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test" : "/mocha ./test/test01.js"
+    "test" : "mocha"
   },
   "dependencies": {
 	    "mocha": "2.0.1",
